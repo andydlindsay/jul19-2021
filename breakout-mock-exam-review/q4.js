@@ -22,6 +22,9 @@
  *
  *    2.67
  */
+const q0Fns = require('./q0');
+const mean = q0Fns.mean;
+const sum = q0Fns.sum;
 
 // This function is to be used by stdev. Do not alter.
 const round = function(number) {
@@ -29,7 +32,29 @@ const round = function(number) {
 };
 
 const stdev = function(arr) {
+  // sqrt(sumOfSquares/numberOfValues)
+  const numberOfValues = arr.length;
+  const populationMean = mean(arr);
 
+  const differences = [];
+  for (const num of arr) {
+    const difference = num - populationMean;
+    differences.push(difference);
+  }
+  
+  const squares = [];
+  for (const difference of differences) {
+    const square = Math.pow(difference, 2);
+    squares.push(square);
+  }
+
+  const sumOfSquares = sum(squares);
+  const avg = sumOfSquares / numberOfValues;
+
+  const squareRoot = Math.sqrt(avg);
+  // console.log(squareRoot);
+
+  return round(squareRoot);
 };
 
 // Don't change below:
