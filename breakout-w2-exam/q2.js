@@ -8,7 +8,7 @@ If the first argument is not an array, our function should return false instead 
 
 Examples:
 
-- countWhich([1, 2, 3, 4, 5], function(num) { return (num > 4); }) returns 1 (only matches 5)
+- countWhich([1, 2, 3, 4, 5], function(num) { return num > 4; }) returns 1 (only matches 5)
 - countWhich(["apple", "banana", "cherry"], function(fruit) { return fruit[0] === "a"; }) returns 1 (only matches apple)
 - countWhich([10, 20, 30, 40, 50], function(num) { return num % 7 === 0; }) returns 0 (none of the numbers are divisible by 7)
 - countWhich(["apple", "banana", "cherry"], function(fruit) { return fruit.length > 5; }) returns 2 ("apple" is shorter than 6 characters)
@@ -18,7 +18,30 @@ Examples:
 */
 
 const countWhich = function(list, cb) {
-  
+  // check precondition(s)
+  if (!Array.isArray(list)) {
+    return false;
+  }
+
+  // if (list === [])
+  // console.log(list === []);
+
+  // variable to hold the count
+  let count = 0;
+
+  // iterate through array
+  for (const element of list) {
+    // call the callback with each element
+    const returnVal = cb(element);
+
+    // if the callback returns truthy, increment the count
+    if (returnVal) {
+      count++;
+    }
+  }
+
+  // return the count
+  return count;
 };
 
 // Don't change below:

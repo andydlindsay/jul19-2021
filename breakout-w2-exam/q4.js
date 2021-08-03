@@ -27,7 +27,41 @@ Examples:
 */
 
 const minmax = function(list) {
+  // set up some variables
+  // let lowest = list[0];
+  // let highest = list[0];
 
+  // // iterate through the list
+  // for (const element of list) {
+  //   // compare each value against the current lowest
+  //   if (element < lowest) {
+  //     // if lower, replace lowest
+  //     lowest = element;
+  //   }
+
+  //   // compare each value against the current highest
+  //   if (element > highest) {
+  //     // if higher, replace highest
+  //     highest = element;
+  //   }
+  // }
+
+  // // return the array
+  // const returnArr = [lowest, highest];
+  // console.log(returnArr);
+  // return returnArr;
+
+  if (typeof list[0] === 'number') {
+    list.sort((a, b) => a - b);
+  } else {
+    list.sort();
+  }
+
+  const lowest = list[0];
+  const highest = list[list.length - 1];
+  const returnArr = [lowest, highest];
+  // console.log(returnArr);
+  return returnArr;
 };
 
 // Don't change below:
