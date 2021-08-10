@@ -1,0 +1,15 @@
+body {
+  background-color: indigo;
+  color: palegoldenrod;
+  font-family: 'Palette Mosaic';
+}
+
+.content {
+  border: 2px solid orange;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.danger {
+  color: red;
+}
