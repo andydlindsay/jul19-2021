@@ -1,0 +1,9 @@
+.post {
+  border: 1px solid blueviolet;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.post > h2 {
+  color: honeydew;
+}
