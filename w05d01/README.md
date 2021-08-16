@@ -10,52 +10,160 @@
 - [x] Aggregation functions
 - [x] `LIMIT` and `OFFSET`
 
-### RDBMS
-* Relational DataBase Management System
-* `psql`, `elephantSQL`
+### Relational Database Management System (RDBMS)
+- A program that serves, **and** controls interactions with, one or more _Relational Databases_
+- Communicates using a custom protocol (eg. `postgres://` for postgres) that sits on top of TCP
+- Front End <-----`http` + `tcp`-----> Back End <-----`postgres` + `tcp`-----> RDBMS
 
-### Relational Data
-* Structured data / schema
-* SQL, NoSQL
-* Tables
-* Row => Record
-* Columns => Fields
-* Creat relationships between tables
-* Primary key (`serial`) => foreign key
+### Structured Data
+- The **S** in **SQL** is for _structured_. This means that our data must conform to a _structure_ in order to store it in the database.
+- The data itself is stored in **tables** which define things such as field names, data types, and other data constraints
+- You are probably familiar with tables already if you've used programs like Excel or Calc
+- Tables are made up of **columns** and **rows**
+  - Columns are called `fields`
+  - Rows are called `records`
+- Each table describes an entity (eg. `users`, `products`, `shifts`, `tweets`)
+  - The fields represent properties of the entity
+  - Each record represents one unique entity
 
-```js
-const user = {
-  username: '',
-  password: '',
-  dob: '',
-  friends: [],
-  phoneNumber: ''
-};
+### Primary Keys
+- In order to reference a particular record in a table, each one is given a unique identifier we call a **Primary Key**
+- Other tables can then make reference to a particular record in another table by storing the Primary Keys value
+- We call a Primary Key stored in another table a **Foreign Key**
+- It is through this Primary Key/Foreign Key relationship that our tables are _related_ to one another
+
+### SELECT
+- The **SELECT** clause queries the database and returns records that match the query
+- Always accompanied by the **FROM** keyword which indicates which table we'd like to query
+- SELECT takes a list of field names as an argument
+- Every SQL command ends in a semicolon (;), that's how we tell the application that we are finished entering our query
+
+```sql
+-- basic SELECT query
+SELECT username, email FROM users;
+
+-- the asterisk (*) can be used as a wildcard to return all fields in the table
+SELECT * FROM users;
+
+-- it is customary to put each SQL clause or keyword on a separate line for readability
+SELECT username, email
+FROM users;
 ```
 
+### Filtering and Ordering
+- We use `WHERE` to filter our results
+- If the record satisfies the `WHERE` criteria (eg. before a certain date, greater than a certain amount), it is included in the query results
+- NOTE: using the `WHERE` clause can filter your records down to zero (ie. no records satisfy the filter criteria)
+
+```sql
+SELECT *
+FROM table_one
+-- return only records where date_due is before the current date
+WHERE date_due < NOW();
 ```
-Authors
-ID, Name, NumOfBooksPublished, FanClubWebsite
-1 Steven King
 
+- Order your results with the `ORDER BY` clause
+- We specify the field that we want to sort by and the sort direction
+- Sort direction is either ascending (`ASC`) or descending (`DESC`)
+- NOTE: the default sort direction is ascending (`ASC`) so you don't need to specify it
 
-Books
-ID Title AuthorId NumOfPages Publisher
-1 The Shining, 1, 8000, Some Publisher
-2 The Stand, 1, 8000, Some Other Publisher
+```sql
+SELECT *
+FROM table_one
+ORDER BY field_one;
+
+-- or in descending order
+ORDER BY field_one DESC;
 ```
 
-### SQL Commands
-* C => INSERT
-* R => SELECT
-* U => UPDATE
-* D => DELETE
+### `JOIN`
+- We connect tables together using **JOIN**s
+- The tables are joined together using the primary key and foreign key
+- There are various types of joins:
+  - `INNER JOIN`: The default. Return only records that have matching records in the other table
+  - `LEFT JOIN`: Return all records from the "left" table and only those from the other table that match
+  - `RIGHT JOIN`: The same as a _LEFT JOIN_, but from the _RIGHT_ instead
+  - `FULL OUTER JOIN`: Return all records from both tables
 
-* CREATE TABLE
-* ALTER TABLE
+```sql
+-- basic INNER JOIN
+SELECT *
+FROM table_one
+INNER JOIN table_two
+ON table_one.id = table_two.table_one_id;
 
+-- since it is the default, you don't have to specify "INNER"
+SELECT *
+FROM table_one
+JOIN table_two
+ON table_one.id = table_two.table_one_id;
+```
 
+### Grouping Records
+- Records that contain the same values (eg. **students** with the same `cohort_id`) can be _grouped_ together using the `GROUP BY` clause
+- If the records contain any unique values, they will not be grouped together
 
+```sql
+SELECT cohort_id, COUNT(cohort_id) AS num_students
+FROM students
+GROUP BY cohort_id;
+```
+
+### Aggregation Functions
+- Aggregation functions give us meta data about our records (eg. count responses, average player score, get minimum value)
+- Some aggregation functions:
+
+| Function | Purpose | Example Usage
+| :-- | :-- | :-- |
+| `COUNT` | Return the number of records grouped together | `COUNT(*) AS num_users` |
+| `SUM` | Add the values of the specified field together | `SUM(player_score) AS total_score` |
+| `MIN` | Return the minimum value from the field | `MIN(player_score) AS lowest_score` |
+| `MAX` | Return the maximum value | `MAX(player_score) AS high_score` |
+| `AVG` | Return the average value | `AVG(player_score) AS average_score` |
+
+### `LIMIT` and `OFFSET`
+- We can limit the amount of records returned from a query using `LIMIT`
+- `LIMIT` accepts an _integer_ as an argument
+
+```sql
+SELECT *
+FROM table_one
+-- only return 50 records
+LIMIT 50;
+```
+
+- NOTE: `LIMIT` runs **after** `ORDER BY` (ie. sort your records then specify how many to return)
+
+```sql
+SELECT *
+FROM table_one
+-- order by a field(s)
+ORDER BY field_name DESC
+-- return the top 10
+LIMIT 10;
+```
+
+- We can skip any number of records using `OFFSET`
+- Like `LIMIT`, `OFFSET` accepts an _integer_ as an argument
+
+```sql
+SELECT *
+FROM table_one
+-- skip the first 10 records
+OFFSET 10;
+```
+
+- `OFFSET` and `LIMIT` work hand-in-hand to create [pagination](https://en.wikipedia.org/wiki/Pagination)
+
+```sql
+SELECT *
+FROM table_one
+-- skip the first 20 records, return the next 10
+LIMIT 10 OFFSET 20;
+
+-- you can specify these in any order
+OFFSET 20 LIMIT 10;
+```
 
 ### SELECT Challenges
 
@@ -150,10 +258,10 @@ HAVING COUNT(songs.*) > 10;
 10. List ALL albums in the database, along with their songs if any
 
 ```sql
+-- RIGHT JOIN
 SELECT album_name, artist_name, song_name
 FROM songs
-RIGHT JOIN albums ON albums.id = songs.album_id
-WHERE songs.album_id IS NULL;
+RIGHT JOIN albums ON albums.id = songs.album_i;
 
 -- LEFT JOIN
 SELECT album_name, artist_name, song_name
