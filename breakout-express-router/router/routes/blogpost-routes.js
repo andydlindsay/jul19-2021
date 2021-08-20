@@ -11,7 +11,12 @@ const blogpostRouter = (db) => {
   });
 
   // GET /blogposts/:blogpost_id
-
+  router.get('/:blogpost_id', (req, res) => {
+    db.query('SELECT * FROM posts WHERE id = $1;', [req.params.blogpost_id])
+      .then((response) => {
+        res.json(response.rows[0]);
+      });
+  });
 
   // return router
   return router;
