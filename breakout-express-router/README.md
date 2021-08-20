@@ -68,21 +68,3 @@ app.use('/my-routes', myRouterFn(dbConnection));
 
 ### Useful Links
 * [Express Router docs](https://expressjs.com/en/4x/api.html#router)
-
-
-```js
-return new Promise((resolve, reject) => {
-  resolve('hello');
-});
-
-return Promise.resolve('hello');
-
-
-// /user/endpoints
-const userRouter = express.Router();
-userRoutes(userRouter, database);
-app.use('/users', userRouter);
-
-function() {}
-function () {}
-```
