@@ -8,3 +8,4 @@
 * [W05D01 - SQL Intro](/w05d01)
 * [W05D05 - Mid-term Project Kickoff](/w05d05)
 * [BREAKOUT - Express Router](/breakout-express-router)
+* [BREAKOUT - CRUD with AJAX](/crud-with-ajax)
