@@ -82,6 +82,8 @@ $(() => {
     // const serialized = $newProductForm.serialize();
     console.log(serialized);
 
+    // 200 to <400 .then
+    // >= 400 .catch
     $.post('/api/products', serialized)
       .then(() => {
         // loadProducts();
