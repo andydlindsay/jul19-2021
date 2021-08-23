@@ -8,12 +8,32 @@
 
   <link rel="stylesheet" href="/styles.css" />
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="/app.js"></script>
+
   <title>Welcome</title>
 </head>
 
 <body>
   <h1>Welcome to our site!</h1>
 
-  <h2>Check out the <a href="/products">products</a></h2>
+  <button id="go-somewhere">Take me somewhere!</button>
+
+  <h2>Create new product!</h2>
+  <form id="new-product">
+    <label>Product name:</label>
+    <input name="productName" />
+    <br/>
+
+    <label>Product price:</label>
+    <input name="price" />
+    <br/>
+
+    <button type="submit">Create!</button>
+  </form>
+
+  <div id="product-container"></div>
+
 </body>
 </html>

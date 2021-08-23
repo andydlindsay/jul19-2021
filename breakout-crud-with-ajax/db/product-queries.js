@@ -1,7 +1,7 @@
 const db = require('./db');
 
 const getProducts = () => {
-  return db.query('SELECT * FROM products;')
+  return db.query('SELECT * FROM products ORDER BY id DESC;')
     .then((response) => {
       return response.rows;
     });
