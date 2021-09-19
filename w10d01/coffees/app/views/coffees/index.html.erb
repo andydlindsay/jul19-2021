@@ -1,0 +1,13 @@
+<h1>All the coffees from <%= @origin.origin_name %>!!</h1>
+
+<%= link_to "Origins", origins_path %>
+
+<% @coffees.each do |coffee| %>
+  <div class="coffee">
+    <h2>Coffee: <%= coffee.blend_name %></h2>
+    <h2>Variety: <%= coffee.variety %></h2>
+    <h2>Notes: <%= coffee.notes %></h2>
+    <h2>Intensifier: <%= coffee.intensifier %></h2>
+    <h2>Origin: <%= coffee.origin.origin_name %></h2>
+  </div>
+<% end %>

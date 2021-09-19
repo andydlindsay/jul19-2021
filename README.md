@@ -9,3 +9,5 @@
 * [W05D05 - Mid-term Project Kickoff](/w05d05)
 * [BREAKOUT - Express Router](/breakout-express-router)
 * [BREAKOUT - CRUD with AJAX](/breakout-crud-with-ajax)
+* [W10D01 - Rails Review](/w10d01)
+* [W10D03 - Advanced Lecture](/w10d03)
