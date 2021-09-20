@@ -1,0 +1,13 @@
+<h1>All the characters from <%= @planet.planet_name %></h1>
+
+<%= link_to "Planets", planets_path %>
+
+<% @characters.each do |character| %>
+  <div class="character">
+    <h2>Name: <%= character.character_name %></h2>
+    <h2>City: <%= character.city %></h2>
+    <h2>Title: <%= character.title %></h2>
+    <h2>Quote: <%= character.quote %></h2>
+    <h2>Planet: <%= character.planet.planet_name %></h2>
+  </div>
+<% end %>
