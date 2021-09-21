@@ -10,4 +10,4 @@
 * [BREAKOUT - Express Router](/breakout-express-router)
 * [BREAKOUT - CRUD with AJAX](/breakout-crud-with-ajax)
 * [W10D01 - Rails Review](/w10d01)
-* [W10D03 - Advanced Lecture](/w10d03)
+* [W10D03 - Intro to TypeScript](/w10d03)
