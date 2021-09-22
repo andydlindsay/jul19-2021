@@ -1,0 +1,11 @@
+"use strict";
+let username = 'jstamos';
+username = 'Bob';
+username = false;
+username = 42;
+const nums = [1, 2, 3];
+nums.push(4);
+nums.push('hello');
+// nums.push(false);
+const myNum = nums.pop();
+console.log(myNum);
